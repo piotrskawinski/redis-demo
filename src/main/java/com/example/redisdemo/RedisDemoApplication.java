@@ -57,7 +57,10 @@ public class RedisDemoApplication {
 
     @PostConstruct
     public void startRedis () throws IOException {
-        redisServer = new RedisServer(PORT);
+        redisServer = RedisServer.builder()
+                .setting("bind 127.0.0.1")
+                .port(PORT).build();
+
         redisServer.start();
 
         log.info("Redis server started at port {}", PORT);
